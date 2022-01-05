@@ -14,7 +14,7 @@ export default function HeaderTabs() {
 }
 
 
-const HeaderButton = (props) => {
+const HeaderButton = (props: any) => {
     return (
         <TouchableOpacity
             style={{
