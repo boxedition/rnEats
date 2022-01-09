@@ -4,14 +4,20 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-export default function SearchBar() {
+export default function SearchBar({cityHandler}:{cityHandler:any}) {
     return (
         <View style={{
             marginTop: 15,
             flexDirection: 'row',
         }}>
             <GooglePlacesAutocomplete
+                query={{key: "AIzaSyAXCQVK4N5ybNNOLPXE2kdl-QjPtM8XCHY"}}
                 placeholder='Search'
+                onPress={ (data, details = null)=> {
+                    console.log(data);
+                    const city = data.description.split(',')[0]
+                    cityHandler(city)
+                }}
                 styles={{
                     textInput: {
                         backgroundColor: "#eee",
