@@ -12,7 +12,7 @@ const YELP_API_KEY = "M4sMoPoaR403riZbOVt-xaE0BAifZFMZky_RiFyMS7gpdflgc530-Qk1DF
 
 export default function Home({navigation}:any) {
     const [restaurantData, setrestaurantData] = useState(localRestaurants);
-    const [city, setCity] = useState("Leiria");
+    const [city, setCity] = useState("Hollywood");
     const [activeTab, setActiveTab] = useState("Delivery");
 
     const getRestaurantsFromYelp = () => {
