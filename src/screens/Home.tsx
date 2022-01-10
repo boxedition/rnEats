@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, View } from 'react-native';
-import HeaderTabs from '../components/HeaderTabs';
-import SearchBar from '../components/SearchBar';
-import Categories from '../components/Categories';
-import RestaurantItems, { localRestaurants } from '../components/RestaurantItems';
-import BottomTabs from '../components/BottomTabs';
+import HeaderTabs from '../components/home/HeaderTabs';
+import SearchBar from '../components/home/SearchBar';
+import Categories from '../components/home/Categories';
+import RestaurantItems, { localRestaurants } from '../components/home/RestaurantItems';
+import BottomTabs from '../components/home/BottomTabs';
 import { Divider } from 'react-native-elements';
 
 const YELP_API_KEY = "M4sMoPoaR403riZbOVt-xaE0BAifZFMZky_RiFyMS7gpdflgc530-Qk1DFbAWmGOiQzCEgqjkXkM3P9dyZqvhgzBUatbaJVKc3sf3bF2lDX0Bwge4fM8xHuoH7DVYXYx";
 
-export default function Home() {
+export default function Home({navigation}:any) {
     const [restaurantData, setrestaurantData] = useState(localRestaurants);
     const [city, setCity] = useState("Leiria");
     const [activeTab, setActiveTab] = useState("Delivery");
@@ -51,7 +51,7 @@ export default function Home() {
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Categories />
-                <RestaurantItems restaurantData={restaurantData} />
+                <RestaurantItems restaurantData={restaurantData} navigation={navigation} />
             </ScrollView>
             <Divider width={1}/>
             <BottomTabs />
