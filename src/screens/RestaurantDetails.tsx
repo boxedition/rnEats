@@ -14,6 +14,7 @@ export default function RestaurantDetails({route, navigation}:any) {
                 marginVertical:5,
             }} />
             <MenuItems />
+            <ViewCart navigation={navigation} restaurantName={route.params.name} />
         </View>
     )
 }
