@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { compose, createStore } from "redux";
 import reducer from './reducers/index';
 
 //Adicionar isto pora debugger no RND

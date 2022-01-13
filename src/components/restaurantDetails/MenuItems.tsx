@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import { Divider } from 'react-native-elements';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -33,7 +33,7 @@ const foods = [
 
 
 
-export default function MenuItems({restaurantName}:any) {
+export default function MenuItems({restaurantName, ...props}:any) {
 
 const dispatch = useDispatch();
 const selectItem = (item:any, checkboxValue: boolean) => dispatch({
@@ -44,6 +44,8 @@ const selectItem = (item:any, checkboxValue: boolean) => dispatch({
     },
 });
 
+
+//useEffect(()=>console.log("[Props]", props),[]);
 const cardItems = useSelector((state) => state.cartReducer.selectedItems.items);
 
 const isFoodInCart = (food:any, cardItems:any) => {
