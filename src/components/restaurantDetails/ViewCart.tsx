@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux';
 import OrderItems from './OrderItems';
+import LottieView from 'lottie-react-native';
 
 import firebase from '../../../firebase';
 
-export default function ViewCart({ navigation }) {
+export default function ViewCart({ navigation }: any) {
     /**
      * Obter todos os items selecionados
      */
     const [modalVisible, setModalVisible] = useState(false);
     const { items, restaurantName } = useSelector((state) => state.cartReducer.selectedItems);
+
+    const [loading, setLoading] = useState(false);
 
     /**
      * Calcular o preço total do carrinho
@@ -23,14 +26,19 @@ export default function ViewCart({ navigation }) {
     })
 
     const addOrderToFirebase = () =>{ 
+        setLoading(true);
         const db = firebase.firestore();
         db.collection("rnEats-Orders").add({
             items:items,
             restaurantName: restaurantName,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        }).then(()=>{
+            setTimeout(() => {
+                setLoading(false);
+                navigation.navigate('OrderCompleted'); 
+            }, 500);
+            setModalVisible(false);
         });
-        setModalVisible(false);
-        navigation.navigate('OrderCompleted');
     };
 
     const checkoutModalContent = () => {
@@ -134,6 +142,25 @@ export default function ViewCart({ navigation }) {
             ) : (
                 <></>
             )}
+            {loading ? (
+            <View style={{
+                backgroundColor: 'black',
+                position: 'absolute',
+                opacity: 0.6,
+                justifyContent: 'center',
+                alignItems:'center',
+                height: "100%",
+                width: "100%",
+            }}>
+                <LottieView style={{
+                    height:300,
+                }}
+                source={require("../../assets/animations/scanner.json")}
+                autoPlay
+                speed={3}
+                />
+            </View>
+            ) : (<></>)}
         </>
 
     );
